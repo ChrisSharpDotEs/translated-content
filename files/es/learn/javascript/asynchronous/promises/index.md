@@ -1,34 +1,35 @@
 ---
-title: How to use promises
+title: Cómo usar promesas
 slug: Learn/JavaScript/Asynchronous/Promises
 page-type: learn-module-chapter
 ---
 
 {{LearnSidebar}}{{PreviousMenuNext("Learn/JavaScript/Asynchronous/Introducing", "Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API", "Learn/JavaScript/Asynchronous")}}
 
-**Promises** are the foundation of asynchronous programming in modern JavaScript. A promise is an object returned by an asynchronous function, which represents the current state of the operation. At the time the promise is returned to the caller, the operation often isn't finished, but the promise object provides methods to handle the eventual success or failure of the operation.
+**Las Promesas** son la base de la programación asincrónica en JavaScript moderno. Una promesa es un objeto de JavaScript (**Promise**) que es devuelto por una función asincrónica y representa el estado actual de la operación. Puede ocurrir que en el momento en el que se devuelve la promesa, esta operación no está terminada, por eso el objeto Promise proporciona métodos para manejar el eventual éxito o fracaso de la operación.
 
 <table>
   <tbody>
     <tr>
-      <th scope="row">Prerequisites:</th>
+      <th scope="row">Requisitos previos:</th>
       <td>
-        A reasonable understanding of JavaScript
-        fundamentals, including event handling.
+        Conocimientos básicos de fundamentos de 
+        JavaScript incluidos el manejo de eventos.
       </td>
     </tr>
     <tr>
-      <th scope="row">Objective:</th>
-      <td>To understand how to use promises in JavaScript.</td>
+      <th scope="row">Objetivo:</th>
+      <td>Entender cómo usar promesas en JavaScript.</td>
     </tr>
   </tbody>
 </table>
 
-In the [previous article](/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), we talked about the use of callbacks to implement asynchronous functions. With that design, you call the asynchronous function, passing in your callback function. The function returns immediately and calls your callback when the operation is finished.
 
-With a promise-based API, the asynchronous function starts the operation and returns a {{jsxref("Promise")}} object. You can then attach handlers to this promise object, and these handlers will be executed when the operation has succeeded or failed.
+En el [anterior artículo](/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), hablamos sobre el uso de callbacks para implementar funciones asíncronas y del problema que supone encadenar funciones asíncronas en términos de legibilidad y mantenimiento. Con aquél diseño, llamas a la función asíncrona pasando la función de callback, de modo que la función devuelve el callback cuando la operación esté terminada.
 
-## Using the fetch() API
+Con una API basada en promesa, la función asíncrona comienza la operación y devuelve un objeto {{jsxref("Promise")}}. Puedes entonces añadir eventos a este objeto promesa y éstos serán ejecutados cuando la operación se finalice con éxito o falle.
+
+## Usando la API Fetch.
 
 > **Note:** In this article, we will explore promises by copying code samples from the page into your browser's JavaScript console. To set this up:
 >
