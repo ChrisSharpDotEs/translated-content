@@ -6,7 +6,7 @@ page-type: learn-module-chapter
 
 {{LearnSidebar}}{{PreviousMenuNext("Learn/JavaScript/Asynchronous/Introducing", "Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API", "Learn/JavaScript/Asynchronous")}}
 
-**Las Promesas** son la base de la programación asincrónica en JavaScript moderno. Una promesa es un objeto de JavaScript (**Promise**) que es devuelto por una función asincrónica y representa el estado actual de la operación. Puede ocurrir que en el momento en el que se devuelve la promesa, esta operación no está terminada, por eso el objeto Promise proporciona métodos para manejar el eventual éxito o fracaso de la operación.
+**Las Promesas** son la base de la programación asincrónica en JavaScript moderno. Una promesa es un objeto de JavaScript (**Promise**) que es devuelto por una función asincrónica y representa el estado actual de la operación. Puede ocurrir que en el momento en el que se devuelve la promesa, esta operación no está terminada, por ello el objeto Promise proporciona métodos para manejar el eventual éxito o fracaso de la operación.
 
 <table>
   <tbody>
@@ -14,34 +14,33 @@ page-type: learn-module-chapter
       <th scope="row">Requisitos previos:</th>
       <td>
         Conocimientos básicos de fundamentos de 
-        JavaScript incluidos el manejo de eventos.
+        JavaScript y Manejo de eventos.
       </td>
     </tr>
     <tr>
       <th scope="row">Objetivo:</th>
-      <td>Entender cómo usar promesas en JavaScript.</td>
+      <td>Entender cómo usar las promesas en JavaScript.</td>
     </tr>
   </tbody>
 </table>
 
 
-En el [anterior artículo](/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), hablamos sobre el uso de callbacks para implementar funciones asíncronas y del problema que supone encadenar funciones asíncronas en términos de legibilidad y mantenimiento. Con aquél diseño, llamas a la función asíncrona pasando la función de callback, de modo que la función devuelve el callback cuando la operación esté terminada.
+En el [anterior artículo](/en-US/docs/Learn/JavaScript/Asynchronous/Introducing), hablamos sobre el uso de callbacks para implementar funciones asíncronas. Con aquél diseño, llamas a la función asíncrona pasando la función de callback, de modo que la función devuelve el callback y esta devolverá la respuesta cuando la operación esté terminada.
 
-Con una API basada en promesa, la función asíncrona comienza la operación y devuelve un objeto {{jsxref("Promise")}}. Puedes entonces añadir eventos a este objeto promesa y éstos serán ejecutados cuando la operación se finalice con éxito o falle.
+Con una API basada en promesas, la función asíncrona comienza la operación y devuelve un objeto {{jsxref("Promise")}}. A este objeto devuelto, puedes agregar eventos o acciones que serán ejecutados cuando la operación se finalice con éxito o falle.
 
 ## Usando la API Fetch.
 
-> **Note:** In this article, we will explore promises by copying code samples from the page into your browser's JavaScript console. To set this up:
->
-> 1. open a browser tab and visit <https://example.org>
-> 2. in that tab, open the JavaScript console in your [browser's developer tools](/en-US/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools)
-> 3. when we show an example, copy it into the console. You will have to reload the page each time you enter a new example, or the console will complain that you have redeclared `fetchPromise`.
+> **Nota:** En este artículo, exploramos las promesas copiando el código de ejemplo de la página a la consola de JavaScript del navegador. Para conseguirlo:
+> 1. Abre una pestaña del navegador y visita <https://example.org>
+> 2. En esa pestaña, abre la consola de JavaScript en las [herramientas_para_desarrolladores](/en-US/docs/Learn/Common_questions/Tools_and_setup/What_are_browser_developer_tools)
+> 4. cuando mostremos un ejemplo, copialo a la consola. Tendrás que recargar la página cada vez que introduzcas un nuevo ejemplo, o la consola mostará que has redeclarado la `fetchPromise`.
 
-In this example, we'll download the JSON file from <https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json>, and log some information about it.
+En este ejemplo, vamos a descargar el archivo JSON desde <https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json>, y registramos algo de información.
 
-To do this, we'll make an **HTTP request** to the server. In an HTTP request, we send a request message to a remote server, and it sends us back a response. In this case, we'll send a request to get a JSON file from the server. Remember in the last article, where we made HTTP requests using the {{domxref("XMLHttpRequest")}} API? Well, in this article, we'll use the {{domxref("fetch", "fetch()")}} API, which is the modern, promise-based replacement for `XMLHttpRequest`.
+Para hacer esto, realizaremos una **solicitud HTTP** al servidor. En una solicitud HTTP, enviamos un mensaje de solicitud a un servidor remoto y este nos envía una respuesta. En este caso, enviaremos una solicitud para obtener un archivo JSON del servidor. ¿Recuerdas el artículo anterior donde realizamos solicitudes HTTP utilizando la API {{domxref("XMLHttpRequest")}}? Bueno, en este artículo usaremos la API {{domxref("fetch", "fetch()")}}, que es el reemplazo moderno y basado en promesas de `XMLHttpRequest`.
 
-Copy this into your browser's JavaScript console:
+Copie esto en la consola JavaScript de su navegador:
 
 ```js
 const fetchPromise = fetch(
@@ -63,6 +62,13 @@ Here we are:
 2. immediately after, logging the `fetchPromise` variable. This should output something like: `Promise { <state>: "pending" }`, telling us that we have a `Promise` object, and it has a `state` whose value is `"pending"`. The `"pending"` state means that the fetch operation is still going on.
 3. passing a handler function into the Promise's **`then()`** method. When (and if) the fetch operation succeeds, the promise will call our handler, passing in a {{domxref("Response")}} object, which contains the server's response.
 4. logging a message that we have started the request.
+
+Aquí estamos:
+
+1. llamando a la API `fetch()` y asignamos el valor de retorno a la variable `fetchPromise`
+2. inmediatamente después, registramos la variable `fetchPromise`. Esto debería generar algo como: `Promise { <state>: "pending" }`, que nos dice que tenemos un objeto `Promise` y que tiene un `state` cuyo valor es `"pending"`. El estado `"pending"` significa que la operación fetch aún continúa.
+3. pasar una función de controlador al método **`then()`** de la Promesa. Cuando (y si) la operación de recuperación tiene éxito, la promesa llamará a nuestro controlador y pasará un objeto {{domxref("Response")}}, que contiene la respuesta del servidor.
+4. registrando un mensaje de que hemos iniciado la solicitud.
 
 The complete output should be something like:
 
